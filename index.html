@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Management</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+        }
+        .container {
+            width: 60%;
+            margin: 0 auto;
+        }
+        h1 {
+            text-align: center;
+        }
+        button {
+            margin: 10px 0;
+            padding: 10px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+        .user-list {
+            margin-top: 20px;
+            padding: 10px;
+            background-color: #f4f4f4;
+            border-radius: 5px;
+        }
+        input {
+            margin: 5px;
+            padding: 10px;
+            font-size: 16px;
+            width: 200px;
+        }
+        .user-item {
+            background-color: #ddd;
+            margin-bottom: 10px;
+            padding: 10px;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>User Management</h1>
+
+    <!-- Create user form -->
+    <div>
+        <h3>Create User</h3>
+        <input type="text" id="name" placeholder="Enter name" />
+        <input type="email" id="email" placeholder="Enter email" />
+        <button onclick="createUser()">Create User</button>
+    </div>
+
+    <!-- Update user form -->
+    <div>
+        <h3>Update User</h3>
+        <input type="number" id="updateId" placeholder="Enter user ID" />
+        <input type="text" id="updateName" placeholder="Enter name" />
+        <input type="email" id="updateEmail" placeholder="Enter email" />
+        <button onclick="updateUser()">Update User</button>
+    </div>
+
+    <!-- Delete user form -->
+    <div>
+        <h3>Delete User</h3>
+        <input type="number" id="deleteId" placeholder="Enter user ID" />
+        <button onclick="deleteUser()">Delete User</button>
+    </div>
+
+    <!-- Get all users -->
+    <div>
+        <h3>Get All Users</h3>
+        <button onclick="getUsers()">Get All Users</button>
+    </div>
+
+    <!-- Display users -->
+    <div class="user-list" id="userList">
+        <!-- Users will be listed here -->
+    </div>
+</div>
+
+<script>
+    const apiUrl = 'http://localhost:8000/users';
+    // const proxyUrl = 'https://cors-anywhere.herokuapp.com'; // The base URL for your Go API
+
+    // Fetch and display all users
+    function getUsers() {
+        fetch(apiUrl)
+            .then(response => response.json())
+            .then(users => {
+                const userList = document.getElementById('userList');
+                userList.innerHTML = ''; // Clear the current list
+
+                users.forEach(user => {
+                    const userDiv = document.createElement('div');
+                    userDiv.className = 'user-item';
+                    userDiv.innerHTML = `ID: ${user.id} | Name: ${user.name} | Email: ${user.email}`;
+                    userList.appendChild(userDiv);
+                });
+            })
+            .catch(error => console.error('Error fetching users:', error));
+    }
+
+    // Create a new user
+    function createUser() {
+        const name = document.getElementById('name').value;
+        const email = document.getElementById('email').value;
+
+        if (!name || !email) {
+            alert('Please provide both name and email');
+            return;
+        }
+
+        const newUser = {
+            name: name,
+            email: email
+        };
+
+        fetch(apiUrl, {
+            method: 'POST', 
+            mode: 'cors',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(newUser)
+        })
+        .then(response => response.json())
+        .then(user => {
+            alert('User created successfully: ' + user.id);
+            getUsers(); // Refresh user list
+        })
+        .catch(error => console.error('Error creating user:', error));
+    }
+
+    // Update an existing user
+    function updateUser() {
+        const id = document.getElementById('updateId').value;
+        const name = document.getElementById('updateName').value;
+        const email = document.getElementById('updateEmail').value;
+
+        if (!id || !name || !email) {
+            alert('Please provide all fields');
+            return;
+        }
+
+        const updatedUser = {
+            name: name,
+            email: email
+        };
+
+        fetch(`http://localhost:8000/users/${id}`, {
+            method: 'PUT',
+            mode: 'cors',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(updatedUser)
+            // credentials:'include',
+        })
+        .then(response => response.json())
+        .then(user => {
+            alert('User updated successfully');
+            getUsers(); // Refresh user list
+        })
+        .catch(error => console.error('Error updating user:', error));
+    }
+
+    // Delete a user
+    function deleteUser() {
+        const id = document.getElementById('deleteId').value;
+
+        if (!id) {
+            alert('Please provide a user ID');
+            return;
+        }
+
+        fetch(`http://localhost:8000/users/${id}`, {
+            method: 'DELETE',
+            mode: 'cors',
+        })
+        .then(response => {
+            if (response.ok) {
+                alert('User deleted successfully');
+                getUsers(); // Refresh user list
+            } else {
+                alert('Error deleting user');
+            }
+        })
+        .catch(error => console.error('Error deleting user:', error));
+    }
+</script>
+
+</body>
+</html>
