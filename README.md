@@ -46,7 +46,7 @@ You can download and install Docker and Docker Compose from the official [Docker
    git clone https://github.com/Fahad-I-Khan/go-mux-gorm.git
    cd go-mux-gorm
    ```
-2. 2. **Build and Run with Docker**
+2. **Build and Run with Docker**
 
 This project uses **Docker** and **Docker Compose** to containerize the Go application and PostgreSQL database. To get everything up and running, follow these steps:
 
