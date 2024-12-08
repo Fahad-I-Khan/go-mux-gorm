@@ -3,13 +3,14 @@
 This is a simple user management API built with Go (using the Mux router), GORM ORM, and PostgreSQL. The application provides endpoints to create, update, delete, and fetch users. It also demonstrates how to use Docker for containerizing the application and PostgreSQL database.
 
 ## Table of Contents
-1. [Prerequisites](#prerequisites)
-2. [Technologies Used](#technologies-used)
-3. [Project Structure](#project-structure)
-4. [Installation and Setup](#installation-and-setup)
-5. [API Endpoints](#api-endpoints)
-- [Example Request (POST /users)](#example-request-post-users)
-6. [Stopping and Removing Containers](#stopping-and-removing-containers)
+1. [Tech Stack & Tools](#tech-stack--tools)  
+2. [Prerequisites](#prerequisites)  
+3. [Technologies Used](#technologies-used)  
+4. [Project Structure](#project-structure)  
+5. [Installation and Setup](#installation-and-setup)  
+6. [API Endpoints](#api-endpoints)  
+   - [Example Request (POST /users)](#example-request-post-users)  
+7. [Stopping and Removing Containers](#stopping-and-removing-containers)
 
 ## Prerequisites
 
@@ -20,13 +21,10 @@ Before running the application, ensure you have the following tools installed:
 
 You can download and install Docker and Docker Compose from the official [Docker website](https://www.docker.com/get-started).
 
-## Technologies Used
-- **Go (Golang)**: A statically typed, compiled programming language used to build the API.
-- **Mux**: A powerful HTTP router and URL matcher for building Go web applications.
-- **GORM**: An ORM (Object-Relational Mapper) for Go that simplifies interacting with the PostgreSQL database. GORM ensures that the `email` field is unique across the `users` table, preventing the creation of users with duplicate emails.
-- **PostgreSQL**: A powerful, open-source relational database used to store user data.
-- **Docker**: A tool for packaging and running applications in lightweight, portable containers.
-- **Docker Compose**: A tool to define and run multi-container Docker applications, used here for managing the Go app and PostgreSQL containers.
+## Tech Stack & Tools
+
+![Go](https://img.shields.io/badge/Language-Go-blue) ![Mux](https://img.shields.io/badge/Router-Mux-blue) ![GORM](https://img.shields.io/badge/ORM-GORM-blue)  
+![PostgreSQL](https://img.shields.io/badge/Database-PostgreSQL-blue) ![Docker](https://img.shields.io/badge/Container-Docker-blue) ![Docker Compose](https://img.shields.io/badge/Docker%20Compose-Used-blueviolet)
 
 ## Project Structure
 
