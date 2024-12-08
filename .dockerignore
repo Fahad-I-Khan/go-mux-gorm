@@ -1,2 +1,3 @@
 # .dockerignore file
 README.md
+.gitattributes
