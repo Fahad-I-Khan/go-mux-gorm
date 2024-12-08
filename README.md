@@ -23,8 +23,9 @@ You can download and install Docker and Docker Compose from the official [Docker
 
 ## Tech Stack & Tools
 
-![Go](https://img.shields.io/badge/Language-Go-blue) ![Mux](https://img.shields.io/badge/Router-Mux-blue) ![GORM](https://img.shields.io/badge/ORM-GORM-blue)  
+![Go](https://img.shields.io/badge/Language-Go-blue) ![Mux](https://img.shields.io/badge/Router-Mux-blue) 
 ![PostgreSQL](https://img.shields.io/badge/Database-PostgreSQL-blue) ![Docker](https://img.shields.io/badge/Container-Docker-blue) ![Docker Compose](https://img.shields.io/badge/Docker%20Compose-Used-blueviolet)
+![JavaScript](https://img.shields.io/badge/Language-JavaScript-yellow)
 
 ## Project Structure
 
